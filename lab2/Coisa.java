@@ -1,4 +1,4 @@
-package lab2;
+import src.base.*;
 
 public class Coisa {
   public static void main(String[] args) {
@@ -8,7 +8,7 @@ public class Coisa {
     System.out.println("-----");
     disciplina();
     System.out.println("-----");
-    // atividadesComplementares();
+    atividadesComplementares();
   }
 
   public static void descanso() {
