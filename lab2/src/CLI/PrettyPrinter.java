@@ -1,5 +1,9 @@
 package src.CLI;
 
+import java.util.Scanner;
+
+import src.base.*;
+
 /**
  * PrettyPrinter
  */
@@ -22,6 +26,13 @@ public class PrettyPrinter {
     System.out.println(separator);
   }
 
+  public void waitForEnter() {
+    System.out.println("Pressione enter para continuar.");
+    Scanner sc = new Scanner(System.in);
+    sc.nextLine();
+    sc.close();
+  }
+
   public void clear() {
     for (int i = 0; i < 50; i++) {
       System.out.println("");
@@ -29,23 +40,27 @@ public class PrettyPrinter {
   }
 
   public void printMainMenu() {
-    print(menuHolder.mainMenu);
+    print(menuHolder.getMainMenu());
   }
 
   public void printAtvComplMenu() {
-    print(menuHolder.atvComplMenu);
+    print(menuHolder.getAtvComplMenu());
   }
 
   public void printDisciplinaMenu() {
-    print(menuHolder.disciplinaMenu);
+    print(menuHolder.getDisciplinaMenu());
+  }
+
+  public void printGerenciarDisciplinaMenu(Disciplina disciplina) {
+    print(menuHolder.getGerenciarDisciplinaMenu(disciplina));
   }
 
   public void printRegistroTempoOnlineMenu() {
-    print(menuHolder.registroTempoOnlineMenu);
+    print(menuHolder.getRegistroTempoOnlineMenu());
   }
 
   public void printDescansoMenu() {
-    print(menuHolder.descansoMenu);
+    print(menuHolder.getDescansoMenu());
   }
 
 }

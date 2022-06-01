@@ -1,23 +1,25 @@
 package src.CLI;
 
+import src.base.*;
+
 /**
  * MenuHolder
  */
 
 public class MenuHolder {
 
-  String[] mainMenu;
-  String[] atvComplMenu;
-  String[] descansoMenu;
-  String[] disciplinaMenu;
-  String[] registroTempoOnlineMenu;
+  private String[] mainMenu;
+  private String[] atvComplMenu;
+  private String[] descansoMenu;
+  private String[] disciplinaMenu;
+  private String[] registroTempoOnlineMenu;
 
   public MenuHolder() {
     mainMenu = new String[6];
     atvComplMenu = new String[6];
     descansoMenu = new String[6];
     registroTempoOnlineMenu = new String[6];
-    disciplinaMenu = new String[7];
+    disciplinaMenu = new String[4];
     //
     mainMenu[0] = "Bem-vindo ao Coisa!";
     mainMenu[1] = "";
@@ -43,10 +45,40 @@ public class MenuHolder {
     disciplinaMenu[0] = "Disciplinas";
     disciplinaMenu[1] = "";
     disciplinaMenu[2] = "1 - Adicionar disciplina";
-    disciplinaMenu[3] = "2 - Adicionar notas";
-    disciplinaMenu[4] = "3 - Definir peso das notas";
-    disciplinaMenu[5] = "4 - Verificar disciplinas";
-    disciplinaMenu[6] = "5 - Verificar situação de aprovação em disciplina";
+    disciplinaMenu[3] = "2 - Gerenciar disciplinas";
+  }
+
+  public String[] getMainMenu() {
+    return mainMenu;
+  }
+
+  public String[] getRegistroTempoOnlineMenu() {
+    return registroTempoOnlineMenu;
+  }
+
+  public String[] getAtvComplMenu() {
+    return atvComplMenu;
+  }
+
+  public String[] getDescansoMenu() {
+    return descansoMenu;
+  }
+
+  public String[] getDisciplinaMenu() {
+    return disciplinaMenu;
+  }
+
+  public String[] getGerenciarDisciplinaMenu(Disciplina disciplina) {
+    String[] gerenciarDisciplinaMenu = new String[6];
+
+    gerenciarDisciplinaMenu[0] = disciplina.getNome();
+    gerenciarDisciplinaMenu[1] = "";
+    gerenciarDisciplinaMenu[2] = "1 - Verificar situação";
+    gerenciarDisciplinaMenu[3] = "2 - Modificar nota";
+    gerenciarDisciplinaMenu[4] = "3 - Modificar pesos";
+    gerenciarDisciplinaMenu[5] = "4 - Adicionar horas dedicadas à disciplina";
+
+    return gerenciarDisciplinaMenu;
   }
 
 }

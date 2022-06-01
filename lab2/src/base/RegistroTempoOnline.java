@@ -46,6 +46,15 @@ public class RegistroTempoOnline {
   }
 
   /**
+   * Define o field tempoEsperadoOnline
+   * 
+   * @param novoTempoEsperado valor para o qual tempoEsperadoOnline será definido.
+   */
+  public void defineTempoEsperadoOnline(int novoTempoEsperado) {
+    tempoEsperadoOnline = novoTempoEsperado;
+  }
+
+  /**
    * @return um booleano referente a se o aluno atingiu ou não a meta de tempo
    *         online.
    */

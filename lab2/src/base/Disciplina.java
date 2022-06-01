@@ -66,6 +66,25 @@ public class Disciplina {
   }
 
   /**
+   * Redifine peso das notas.
+   * 
+   * @param nota       posição da nota para ser alterada.
+   * @param pesoDaNota novo peso da nota que será definido.
+   */
+  public void definePesoDeNota(int nota, int pesoDaNota) {
+    pesoDasNotas[nota - 1] = pesoDaNota;
+  }
+
+  /**
+   * Getter para o valor do nome da disciplina.
+   * 
+   * @return nome da disciplina
+   */
+  public String getNome() {
+    return nome;
+  }
+
+  /**
    * Cadastra nota em uma posição especificada do array de notas.
    * 
    * @param nota               posição da nota no array de notas.

@@ -1,4 +1,6 @@
 import src.base.*;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 import src.CLI.*;
 
@@ -15,16 +17,16 @@ public class CoisaCLI {
   private Scanner sc;
   private AtividadesComplementares atividades;
   private Descanso descanso;
-  private Disciplina[] disciplina;
-  private RegistroTempoOnline[] regTempOnline;
+  private ArrayList<Disciplina> disciplina;
+  private ArrayList<RegistroTempoOnline> regTempOnline;
 
   public CoisaCLI() {
     sc = new Scanner(System.in);
     printer = new PrettyPrinter();
     atividades = new AtividadesComplementares();
     descanso = new Descanso();
-    disciplina = new Disciplina[10];
-    regTempOnline = new RegistroTempoOnline[10];
+    disciplina = new ArrayList<Disciplina>();
+    regTempOnline = new ArrayList<RegistroTempoOnline>();
   }
 
   public void run() {
@@ -101,7 +103,7 @@ public class CoisaCLI {
           for (String line : atividades.pegaAtividades()) {
             System.out.println(line);
           }
-          System.out.println("Pressione enter para continuar.");
+          printer.waitForEnter();
           sc.nextLine();
           break;
 
@@ -144,7 +146,7 @@ public class CoisaCLI {
           break;
         case "4":
           System.out.println(descanso.getStatusGeral());
-          System.out.println("Pressione enter para continuar.");
+          printer.waitForEnter();
           sc.nextLine();
           break;
 
@@ -157,8 +159,104 @@ public class CoisaCLI {
   }
 
   public void handleDisciplina() {
+    boolean invalidEntry = false;
     printer.printDisciplinaMenu();
     String escolha = sc.nextLine();
+    String nome;
+    int numeroDeNotas;
+
+    do {
+      switch (escolha) {
+        case "1":
+          System.out.println("Digite o nome da disciplina:");
+          nome = sc.nextLine();
+          System.out.println("Digite a quantidade de notas da disciplina:");
+          numeroDeNotas = Integer.parseInt(sc.nextLine());
+
+          int[] pesoDasNotas = new int[numeroDeNotas];
+          for (int i = 0; i < numeroDeNotas; i++) {
+            System.out.println("Digite o peso da disciplina " + (i + 1) + ":");
+            int peso = Integer.parseInt(sc.nextLine());
+            pesoDasNotas[i] = peso;
+          }
+
+          Disciplina novaDisciplina = new Disciplina(nome, numeroDeNotas, pesoDasNotas);
+          for (int i = 0; i < numeroDeNotas; i++) {
+            System.out.println("Digite a nota da disciplina " + (i + 1) + ":");
+            double nota = Double.parseDouble(sc.nextLine());
+            novaDisciplina.cadastraNota(i + 1, nota);
+          }
+
+          disciplina.add(novaDisciplina);
+          regTempOnline.add(new RegistroTempoOnline(nome));
+          break;
+        case "2":
+          handleGerenciarDisciplina();
+          break;
+
+        default:
+          invalidEntry = true;
+          break;
+      }
+      printer.clear();
+    } while (invalidEntry);
+
+  }
+
+  public void handleGerenciarDisciplina() {
+    boolean invalidEntry = false;
+    int valor;
+    do {
+      if (invalidEntry)
+        System.out.println("Entrada inválida, tente novamente.");
+      invalidEntry = false;
+
+      System.out.println("Digite a disciplina desejada:");
+      for (int i = 0; i < disciplina.size(); i++) {
+        Disciplina opcao = disciplina.get(i);
+        System.out.println((i + 1) + " - " + opcao.getNome());
+      }
+      int escolha = Integer.parseInt(sc.nextLine());
+      if (escolha <= disciplina.size() && escolha > 0) {
+        Disciplina selecionada = disciplina.get(escolha - 1);
+        printer.clear();
+        printer.printGerenciarDisciplinaMenu(selecionada);
+        escolha = Integer.parseInt(sc.nextLine());
+        switch (escolha) {
+          case 1:
+            String aprovacao = selecionada.aprovado() ? "Aprovado" : "Reprovado";
+            System.out.println(selecionada.toString() + aprovacao);
+            break;
+          case 2:
+            System.out.println("Digite a nota para alterar:");
+            escolha = Integer.parseInt(sc.nextLine());
+            System.out.println("Digite o novo valor da nota:");
+            valor = Integer.parseInt(sc.nextLine());
+            selecionada.cadastraNota(escolha, valor);
+            break;
+          case 3:
+            System.out.println("Digite a nota que terá seu peso alterado:");
+            escolha = Integer.parseInt(sc.nextLine());
+            System.out.println("Digite o novo valor do peso:");
+            valor = Integer.parseInt(sc.nextLine());
+            selecionada.definePesoDeNota(escolha, valor);
+            break;
+          case 4:
+            System.out.println("Quantidade de horas para adicionar:");
+            valor = Integer.parseInt(sc.nextLine());
+            selecionada.cadastraHoras(valor);
+            break;
+
+          default:
+            invalidEntry = true;
+            break;
+        }
+      } else {
+        invalidEntry = true;
+      }
+
+    } while (invalidEntry);
+
   }
 
   public void handleRegistroTempoOnline() {
