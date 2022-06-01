@@ -15,7 +15,6 @@ public class PrettyPrinter {
   }
 
   private void print(String[] main) {
-    clear();
     System.out.println(separator);
     for (String line : main) {
       System.out.println(line);

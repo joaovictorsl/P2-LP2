@@ -1,7 +1,5 @@
 import src.base.*;
-
 import java.util.Scanner;
-
 import src.CLI.*;
 
 /**
@@ -10,65 +8,161 @@ import src.CLI.*;
  * 
  * @author João Victor de Souza Lucena
  */
+
 public class CoisaCLI {
 
   private PrettyPrinter printer;
+  private Scanner sc;
+  private AtividadesComplementares atividades;
+  private Descanso descanso;
+  private Disciplina[] disciplina;
+  private RegistroTempoOnline[] regTempOnline;
 
   public CoisaCLI() {
+    sc = new Scanner(System.in);
     printer = new PrettyPrinter();
+    atividades = new AtividadesComplementares();
+    descanso = new Descanso();
+    disciplina = new Disciplina[10];
+    regTempOnline = new RegistroTempoOnline[10];
   }
 
   public void run() {
     boolean stayIn = true;
+    boolean invalidEntry = false;
+
     do {
-      Scanner sc = new Scanner(System.in);
+      printer.clear();
+
+      if (invalidEntry)
+        System.out.println("Entrada inválida, tente novamente.");
+      invalidEntry = false;
 
       printer.printMainMenu();
       String escolha = sc.nextLine();
-      sc.close();
+      printer.clear();
 
       switch (escolha) {
         case "1":
-          printer.printAtvComplMenu();
           handleAtvCompl();
           break;
         case "2":
-          printer.printDescansoMenu();
           handleDescanso();
           break;
         case "3":
-          printer.printDisciplinaMenu();
           handleDisciplina();
           break;
         case "4":
-          printer.printRegistroTempoOnlineMenu();
           handleRegistroTempoOnline();
+          break;
+        case "0":
+          stayIn = false;
           break;
 
         default:
-          stayIn = false;
+          invalidEntry = true;
           break;
       }
     } while (stayIn);
   }
 
   public void handleAtvCompl() {
-    Scanner sc = new Scanner(System.in);
-    String escolha = sc.nextLine();
+    boolean invalidEntry = false;
+    do {
+
+      if (invalidEntry)
+        System.out.println("Entrada inválida, tente novamente.");
+
+      printer.printAtvComplMenu();
+      String escolha = sc.nextLine();
+      int meses, horas;
+      double horasDeCurso;
+      printer.clear();
+
+      switch (escolha) {
+        case "1":
+          System.out.println("Total de horas do estágio:");
+          horas = Integer.parseInt(sc.nextLine());
+          System.out.println("Total de meses do estágio:");
+          meses = Integer.parseInt(sc.nextLine());
+          atividades.adicionarEstagio(horas, meses);
+          break;
+        case "2":
+          System.out.println("Digite os meses do projeto:");
+          meses = Integer.parseInt(sc.nextLine());
+          atividades.adicionarProjeto(meses);
+          break;
+        case "3":
+          System.out.println("Horas de curso para adicionar:");
+          horasDeCurso = Double.parseDouble(sc.nextLine());
+          atividades.adicionarCurso(horasDeCurso);
+          break;
+        case "4":
+          for (String line : atividades.pegaAtividades()) {
+            System.out.println(line);
+          }
+          System.out.println("Pressione enter para continuar.");
+          sc.nextLine();
+          break;
+
+        default:
+          invalidEntry = true;
+          break;
+      }
+      printer.clear();
+    } while (invalidEntry);
+
   }
 
   public void handleDescanso() {
-    Scanner sc = new Scanner(System.in);
-    String escolha = sc.nextLine();
+    boolean invalidEntry = false;
+    do {
+      if (invalidEntry)
+        System.out.println("Entrada inválida, tente novamente.");
+
+      printer.printDescansoMenu();
+      String escolha = sc.nextLine();
+      int semanas, horas;
+      String emoji;
+      printer.clear();
+
+      switch (escolha) {
+        case "1":
+          System.out.println("Digite a quantidade de horas:");
+          horas = Integer.parseInt(sc.nextLine());
+          descanso.defineHorasDescanso(horas);
+          break;
+        case "2":
+          System.out.println("Digite a quantidade de semanas:");
+          semanas = Integer.parseInt(sc.nextLine());
+          descanso.defineNumeroSemanas(semanas);
+          break;
+        case "3":
+          System.out.println("Digite o emoji desejado:");
+          emoji = sc.nextLine();
+          descanso.definirEmoji(emoji);
+          break;
+        case "4":
+          System.out.println(descanso.getStatusGeral());
+          System.out.println("Pressione enter para continuar.");
+          sc.nextLine();
+          break;
+
+        default:
+          invalidEntry = true;
+          break;
+      }
+      printer.clear();
+    } while (invalidEntry);
   }
 
   public void handleDisciplina() {
-    Scanner sc = new Scanner(System.in);
+    printer.printDisciplinaMenu();
     String escolha = sc.nextLine();
   }
 
   public void handleRegistroTempoOnline() {
-    Scanner sc = new Scanner(System.in);
+    printer.printRegistroTempoOnlineMenu();
     String escolha = sc.nextLine();
   }
 

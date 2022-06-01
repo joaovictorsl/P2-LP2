@@ -136,7 +136,7 @@ public class AtividadesComplementares {
 
     atividadesFormatadas[posicoesOcupadas++] = "Creditos_Estagio " + creditosEstagio;
     atividadesFormatadas[posicoesOcupadas++] = "Creditos_Projeto " + creditosProjeto;
-    atividadesFormatadas[posicoesOcupadas] = "Creditos_Cursos " + horasDeCursoTotal + " " + getCreditosCurso();
+    atividadesFormatadas[posicoesOcupadas] = "Creditos_Cursos " + " " + getCreditosCurso();
 
     return atividadesFormatadas;
   }
