@@ -1,4 +1,4 @@
-package src.base;
+package Lab2_JOAO_VICTOR_DE_SOUZA_LUCENA.src.base;
 
 /**
  * A classe Descanso serve para descrever o descanso do aluno e julgar se ele

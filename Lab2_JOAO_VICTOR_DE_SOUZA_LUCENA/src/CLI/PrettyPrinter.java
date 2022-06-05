@@ -1,8 +1,8 @@
-package src.CLI;
+package Lab2_JOAO_VICTOR_DE_SOUZA_LUCENA.src.CLI;
 
 import java.util.Scanner;
 import java.util.ArrayList;
-import src.base.*;
+import Lab2_JOAO_VICTOR_DE_SOUZA_LUCENA.src.base.*;
 
 /**
  * PrettyPrinter é utilizada para organizar a maneira de printar informações no

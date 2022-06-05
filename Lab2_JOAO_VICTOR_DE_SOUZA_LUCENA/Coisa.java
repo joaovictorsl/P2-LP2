@@ -1,4 +1,6 @@
-import src.base.*;
+package Lab2_JOAO_VICTOR_DE_SOUZA_LUCENA;
+
+import Lab2_JOAO_VICTOR_DE_SOUZA_LUCENA.src.base.*;
 
 public class Coisa {
   public static void main(String[] args) {

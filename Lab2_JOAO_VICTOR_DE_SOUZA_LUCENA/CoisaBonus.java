@@ -1,4 +1,6 @@
-import src.base.*;
+package Lab2_JOAO_VICTOR_DE_SOUZA_LUCENA;
+
+import Lab2_JOAO_VICTOR_DE_SOUZA_LUCENA.src.base.*;
 
 /**
  * CoisaBonus serve como uma classe de testes para mim. Através de asserts vejo
@@ -16,7 +18,7 @@ public class CoisaBonus {
       "Cursos 59.0",
       "Creditos_Estagio 5",
       "Creditos_Projeto 4",
-      "Creditos_Cursos 59.0 1",
+      "Creditos_Cursos  1",
   };
 
   // Gabarito do segundo array de strings das atividadesComplementares.
@@ -28,7 +30,7 @@ public class CoisaBonus {
       "Cursos 90.0",
       "Creditos_Estagio 15",
       "Creditos_Projeto 8",
-      "Creditos_Cursos 90.0 3",
+      "Creditos_Cursos  3",
   };
 
   /**

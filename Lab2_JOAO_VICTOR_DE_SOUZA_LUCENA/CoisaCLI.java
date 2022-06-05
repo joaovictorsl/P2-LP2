@@ -1,9 +1,11 @@
+package Lab2_JOAO_VICTOR_DE_SOUZA_LUCENA;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import src.base.*;
-import src.CLI.*;
+import Lab2_JOAO_VICTOR_DE_SOUZA_LUCENA.src.base.*;
+import Lab2_JOAO_VICTOR_DE_SOUZA_LUCENA.src.CLI.*;
 
 /**
  * CoisaCLI é a classe responsável por ordenar a interação do usuário com o

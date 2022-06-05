@@ -1,6 +1,6 @@
-package src.CLI;
+package Lab2_JOAO_VICTOR_DE_SOUZA_LUCENA.src.CLI;
 
-import src.base.*;
+import Lab2_JOAO_VICTOR_DE_SOUZA_LUCENA.src.base.*;
 
 /**
  * MenuHolder é uma classe valor. Carrega os arrays que representam os menus.
