@@ -2,7 +2,7 @@ package src.base;
 
 /**
  * RegistroTempoOnline serve para registrar o temopo online que um estudante
- * dedica a uma disciplina.
+ * dedica a uma disciplina. O número padrão de horas esperadas é 120.
  * 
  * @author João Victor de Souza Lucena
  */
@@ -18,8 +18,6 @@ public class RegistroTempoOnline {
 
   /**
    * Construtor define 120 como número padrão de tempo esperado online.
-   * 
-   * @param nomeDaDisciplina o nome da disciplina.
    */
   public RegistroTempoOnline(String nomeDaDisciplina) {
     this(nomeDaDisciplina, 120);
@@ -38,20 +36,22 @@ public class RegistroTempoOnline {
 
   /**
    * Soma tempo ao tempoInvestidoOnline.
-   * 
-   * @param tempoParaAdicionar tempo que será somado em tempoInvestidoOnline.
    */
   public void adicionaTempoOnline(int tempoParaAdicionar) {
+    if (tempoParaAdicionar < 0)
+      return;
+
     tempoInvestidoOnline += tempoParaAdicionar;
   }
 
   /**
-   * Define o field tempoEsperadoOnline
-   * 
-   * @param novoTempoEsperado valor para o qual tempoEsperadoOnline será definido.
+   * Define o field tempoEsperadoOnline.
    */
-  public void defineTempoEsperadoOnline(int novoTempoEsperado) {
-    tempoEsperadoOnline = novoTempoEsperado;
+  public void defineTempoEsperadoOnline(int novoParaTempoEsperado) {
+    if (novoParaTempoEsperado < 0)
+      return;
+
+    tempoEsperadoOnline = novoParaTempoEsperado;
   }
 
   /**
@@ -78,8 +78,6 @@ public class RegistroTempoOnline {
    * System.out.println(exemplo.toString());
    * OUTPUT:
    * Teste 0/120
-   * 
-   * @return String que representa a classe.
    */
   public String toString() {
     return nomeDaDisciplina + " " + tempoInvestidoOnline + "/" + tempoEsperadoOnline;

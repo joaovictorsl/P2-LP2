@@ -2,7 +2,9 @@ package src.base;
 
 /**
  * A classe Descanso serve para descrever o descanso do aluno e julgar se ele
- * está ou não cansado baseado na razão horas de descanso por semana.
+ * está ou não cansado baseado na razão horas de descanso por semana. Por padrão
+ * numerosDeSemana é iniciado com 1, status é iniciado como cansado e emoji é
+ * iniciado como vazio.
  * 
  * @author João Victor de Souza Lucena
  */
@@ -32,9 +34,12 @@ public class Descanso {
    * Método para definir horas de descanso.
    * 
    * @param horasDeDescanso quantidade de horas de descanso para as
-   *                        numerosDeSemana semana.
+   *                        numerosDeSemana semanas.
    */
   public void defineHorasDescanso(int horasDeDescanso) {
+    if (horasDeDescanso < 0)
+      return;
+
     this.horasDeDescanso = horasDeDescanso;
     status = calcStatusGeral();
   }
@@ -47,14 +52,15 @@ public class Descanso {
    *                        distribuídas.
    */
   public void defineNumeroSemanas(int numerosDeSemana) {
+    if (numerosDeSemana <= 0)
+      return;
+
     this.numerosDeSemana = numerosDeSemana;
     status = calcStatusGeral();
   }
 
   /**
    * Método para definição de emoji.
-   * 
-   * @param emoji emoji definido pelo aluno para expressar como se sente.
    */
   public void definirEmoji(String emoji) {
     this.emoji = emoji;

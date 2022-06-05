@@ -4,19 +4,21 @@ import java.util.ArrayList;
 
 /**
  * AtividadesComplementares é uma classe para o estudante administrar suas
- * atividades complementares e os créditos adquiridos através delas.
+ * atividades complementares e os créditos adquiridos através delas. Por padrão
+ * a quantidade de meses para estágios são 4. A cada 300 horas de estágio o
+ * estudante pode ganhar 5 créditos se as quantidade de meses do estágio for 4
+ * ou mais, a cada 4 unidades de estágio o máximo de créditos do estágio sobe em
+ * 5. Horas/meses perdidos de estágios e projetos são jogados foras, horas
+ * quebradas de curso são reutilizadas.
  * 
  * @author João Victor de Souza Lucena
  */
 
 public class AtividadesComplementares {
 
-  // Hora total adquiridas através de cursos
   private double horasDeCursoTotal;
-  // Creditos totais adquiridos através de estágios.
-  private int creditosEstagio;
-  // Creditos totais adquiridos através de projetos.
-  private int creditosProjeto;
+  private int creditosTotaisEstagio;
+  private int creditosTotaisProjeto;
   // Histórico com horas de estágios e seus meses
   private ArrayList<int[]> historicoDeEstagios;
   // Histórico com meses de projetos
@@ -34,29 +36,29 @@ public class AtividadesComplementares {
   /**
    * Método serve para definir o valor padrão de 4 meses quando apenas as horas
    * forem passadas para o método adicionarEstagio.
-   * 
-   * @param horas quantidade de horas para adicionar.
    */
-  public void adicionarEstagio(int horas) {
-    adicionarEstagio(horas, 4);
+  public void adicionarEstagio(int horasParaAdicionar) {
+    adicionarEstagio(horasParaAdicionar, 4);
   }
 
   /**
    * Adiciona o estágio ao histórico e adiciona os creditos adquiridos nele. Além
    * disso limita o número máximo de estágios para 9.
    * 
-   * @param horas quantidade de horas para adicionar.
-   * @param meses quantidade de meses, a qual limita a quantidade de créditos que
-   *              o aluno pode ganhar pelas horas a cada 4 meses o aluno pode
-   *              ganhar +5 créditos no máximo.
+   * @param horasDoEstagio quantidade de horas para adicionar.
+   * @param mesesDoEstagio quantidade de meses, a qual limita a quantidade de
+   *                       créditos que
+   *                       o aluno pode ganhar pelas horas a cada 4 meses o aluno
+   *                       pode
+   *                       ganhar +5 créditos no máximo.
    */
-  public void adicionarEstagio(int horas, int meses) {
+  public void adicionarEstagio(int horasDoEstagio, int mesesDoEstagio) {
     if (historicoDeEstagios.size() == 9)
       return;
 
-    historicoDeEstagios.add(new int[] { horas, meses });
+    historicoDeEstagios.add(new int[] { horasDoEstagio, mesesDoEstagio });
 
-    creditosEstagio += calcQuantCreditoEstagios(horas, meses);
+    creditosTotaisEstagio += calcQuantCreditoEstagios(horasDoEstagio, mesesDoEstagio);
   }
 
   /**
@@ -83,7 +85,7 @@ public class AtividadesComplementares {
 
     historicoDeProjetos.add(meses);
 
-    creditosProjeto += meses / 3 * 2;
+    creditosTotaisProjeto += meses / 3 * 2;
   }
 
   /**
@@ -112,7 +114,7 @@ public class AtividadesComplementares {
    * @return somatório de créditos.
    */
   public int contaCreditos() {
-    return creditosProjeto + getCreditosCurso() + creditosEstagio;
+    return creditosTotaisProjeto + getCreditosCurso() + creditosTotaisEstagio;
   }
 
   /**
@@ -134,8 +136,8 @@ public class AtividadesComplementares {
 
     atividadesFormatadas[posicoesOcupadas++] = "Cursos " + horasDeCursoTotal;
 
-    atividadesFormatadas[posicoesOcupadas++] = "Creditos_Estagio " + creditosEstagio;
-    atividadesFormatadas[posicoesOcupadas++] = "Creditos_Projeto " + creditosProjeto;
+    atividadesFormatadas[posicoesOcupadas++] = "Creditos_Estagio " + creditosTotaisEstagio;
+    atividadesFormatadas[posicoesOcupadas++] = "Creditos_Projeto " + creditosTotaisProjeto;
     atividadesFormatadas[posicoesOcupadas] = "Creditos_Cursos " + " " + getCreditosCurso();
 
     return atividadesFormatadas;

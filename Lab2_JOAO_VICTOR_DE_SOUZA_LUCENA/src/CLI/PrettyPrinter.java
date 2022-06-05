@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import src.base.*;
 
 /**
- * PrettyPrinter
+ * PrettyPrinter é utilizada para organizar a maneira de printar informações no
+ * console.
  */
 
 public class PrettyPrinter {

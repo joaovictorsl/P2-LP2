@@ -3,7 +3,7 @@ package src.CLI;
 import src.base.*;
 
 /**
- * MenuHolder
+ * MenuHolder é uma classe valor. Carrega os arrays que representam os menus.
  */
 
 public class MenuHolder {

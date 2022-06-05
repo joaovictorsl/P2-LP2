@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * Disciplina é uma classe na qual o aluno gerencia sua situação de notas em uma
- * disciplina.
+ * disciplina. Por padrão o peso das notas é 1 e a quantidade de notas é 4.
  * 
  * @author João Victor de Souza Lucena
  */
@@ -23,8 +23,6 @@ public class Disciplina {
   /**
    * Esse construtor serve para deixar o número de notas padrão como 4 quando
    * apenas o nome da disciplina for passado.
-   * 
-   * @param nome nome da disciplina
    */
   public Disciplina(String nome) {
     this(nome, 4);
@@ -33,8 +31,6 @@ public class Disciplina {
   /**
    * Constrói uma disciplina com nome, numero de notas e define os pesos de todas
    * as notas para 1.
-   * 
-   * @param numeroDeNotas quantidade de notas
    */
   public Disciplina(String nome, int numeroDeNotas) {
     this.nome = nome;
@@ -57,22 +53,21 @@ public class Disciplina {
 
   /**
    * Soma horas nas horas de estudo dedicadas à disciplina.
-   * 
-   * @param horasParaCadastrar horas que serão somadas nas horas de estudo
-   *                           dedicadas à disciplina.
    */
   public void cadastraHoras(int horasParaCadastrar) {
+    if (horasParaCadastrar < 0)
+      return;
+
     horasDeEstudo += horasParaCadastrar;
   }
 
   /**
    * Redifine peso das notas.
    * 
-   * @param nota       posição da nota para ser alterada.
-   * @param pesoDaNota novo peso da nota que será definido.
+   * @param nota posição da nota para ser alterada.
    */
-  public void definePesoDeNota(int nota, int pesoDaNota) {
-    pesoDasNotas[nota - 1] = pesoDaNota;
+  public void definePesoDeNota(int nota, int novoPesoDaNota) {
+    pesoDasNotas[nota - 1] = novoPesoDaNota;
   }
 
   /**
@@ -87,13 +82,11 @@ public class Disciplina {
   /**
    * Cadastra nota em uma posição especificada do array de notas.
    * 
-   * @param nota               posição da nota no array de notas.
-   * @param valorParaCadastrar valor para ser guardado na posição nota do array de
-   *                           notas.
+   * @param nota posição da nota no array de notas.
    */
-  public void cadastraNota(int nota, double valorParaCadastrar) {
+  public void cadastraNota(int nota, double novoValorDaNota) {
     int index = nota - 1;
-    notas[index] = valorParaCadastrar;
+    notas[index] = novoValorDaNota;
   }
 
   /**
@@ -131,8 +124,6 @@ public class Disciplina {
    * System.out.println(calculo.toString());
    * OUTPUT:
    * Cálculo 56 0.0 [0.0, 0.0, 0.0, 0.0]
-   * 
-   * @return String que representa a disciplina como uma String.
    */
   public String toString() {
     return nome + " " + horasDeEstudo + " " + getMedia() + " " + Arrays.toString(notas);

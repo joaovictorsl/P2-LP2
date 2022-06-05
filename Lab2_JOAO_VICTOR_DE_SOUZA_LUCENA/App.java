@@ -1,5 +1,5 @@
 /**
- * App
+ * App é uma classe para executar o CoisaCLI.
  */
 
 public class App {
