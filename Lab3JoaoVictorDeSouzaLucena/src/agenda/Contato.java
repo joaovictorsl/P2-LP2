@@ -8,6 +8,7 @@ public class Contato {
   private String nome;
   private String sobrenome;
   private String telefone;
+  private String[] tags;
 
   public Contato(String nome, String sobrenome, String telefone) {
     this.nome = nome;
@@ -17,6 +18,10 @@ public class Contato {
 
   public String getNomeCompleto() {
     return nome + " " + sobrenome;
+  }
+
+  public String getTelefone() {
+    return telefone;
   }
 
   @Override
@@ -34,6 +39,7 @@ public class Contato {
       return false;
 
     Contato other = (Contato) obj;
-    return other.nome.equals(nome) && other.sobrenome.equals(sobrenome);
+    String outroNomeCompleto = other.getNomeCompleto();
+    return getNomeCompleto().equals(outroNomeCompleto);
   }
 }

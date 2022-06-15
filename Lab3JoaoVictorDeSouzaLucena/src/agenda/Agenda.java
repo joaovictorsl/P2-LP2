@@ -1,5 +1,7 @@
 package agenda;
 
+import java.util.Arrays;
+
 /**
  * Uma agenda que mantém uma lista de contatos com posições. Podem existir 100
  * contatos.
@@ -10,14 +12,17 @@ package agenda;
 public class Agenda {
 
   private static final int TAMANHO_AGENDA = 100;
+  private static final int TAMANHO_FAVORITOS = 10;
 
   private Contato[] contatos;
+  private Contato[] listaDeFavoritos;
 
   /**
    * Cria uma agenda.
    */
   public Agenda() {
     this.contatos = new Contato[TAMANHO_AGENDA];
+    this.listaDeFavoritos = new Contato[TAMANHO_FAVORITOS];
   }
 
   /**
@@ -48,16 +53,55 @@ public class Agenda {
    * @param sobrenome Sobrenome do contato.
    * @param telefone  Telefone do contato.
    */
-  public void cadastraContato(int posicao, String nome, String sobrenome, String telefone) {
+  public boolean cadastraContato(int posicao, String nome, String sobrenome, String telefone) {
+    Contato novoContato = new Contato(nome, sobrenome, telefone);
+
+    if(contatoRepetido(novoContato)) {
+      System.out.println("CONTATO JÁ CADASTRADO");
+      return false;
+    }
+    
+    this.contatos[posicao] = novoContato;
+    return true;
+  }
+
+  public String adicionaFavorito(int posicao, Contato contato) {
+    if(posicao > 10 || posicao < 1) {
+      return "POSICAO INVÁLIDA";
+    }
+
+    if(contato == null) {
+      return "CONTATO INVÁLIDO";
+    }
+
+    if(contatoRepetido(contato, listaDeFavoritos)) {
+      return "CONTATO JÁ CADASTRADO";
+    }
+
+    listaDeFavoritos[posicao] = contato;
+    return "CONTATO FAVORITADO NA POSIÇÃO " + posicao
+  }
+
+  public boolena ehFavorito(Contato contato) {
+    for(Contato favorito : listaDeFavoritos) {
+      if(contato.equals(favorito))
+        return true;
+    }
+    return false;
+  }
+
+  public void carregaContato(int posicao, String nome, String sobrenome, String telefone) {
     Contato novoContato = new Contato(nome, sobrenome, telefone);
     this.contatos[posicao] = novoContato;
   }
 
-  public boolean contatoRepetido(String nome, String sobrenome) {
-    Contato tempContato = new Contato(nome, sobrenome, "12345678");
+  public boolean contatoRepetido(Contato tempContato) {
+    return contatoRepetido(tempContato, contatos);
+  }
 
-    for (Contato contato : contatos) {
-      if (contato.equals(tempContato))
+  private boolean contatoRepetido(Contato tempContato, Contato[] listaDeContato) {
+    for (Contato contato : listaDeContato) {
+      if (contato != null && contato.equals(tempContato))
         return true;
     }
 
