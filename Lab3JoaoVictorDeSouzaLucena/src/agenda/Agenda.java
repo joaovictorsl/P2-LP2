@@ -1,7 +1,5 @@
 package agenda;
 
-import java.util.Arrays;
-
 /**
  * Uma agenda que mantém uma lista de contatos com posições. Podem existir 100
  * contatos.
@@ -34,6 +32,30 @@ public class Agenda {
     return this.contatos.clone();
   }
 
+  public boolean removerContato(int posicao) {
+    Contato paraRemover = contatos[posicao];
+
+    if (paraRemover == null)
+      return false;
+
+    contatos[posicao] = null;
+    int indexFav = ehFavorito(paraRemover);
+
+    if (indexFav != -1)
+      listaDeFavoritos[indexFav] = null;
+
+    return true;
+  }
+
+  /**
+   * Acessa a lista de favoritos.
+   * 
+   * @return array de favoritos.
+   */
+  public Contato[] getListaDeFavoritos() {
+    return listaDeFavoritos;
+  }
+
   /**
    * Acessa os dados de um contato específico.
    * 
@@ -41,7 +63,7 @@ public class Agenda {
    * @return Dados do contato. Null se não há contato na posição.
    */
   public Contato getContato(int posicao) {
-    return contatos[posicao];
+    return contatos[posicao - 1];
   }
 
   /**
@@ -56,43 +78,44 @@ public class Agenda {
   public boolean cadastraContato(int posicao, String nome, String sobrenome, String telefone) {
     Contato novoContato = new Contato(nome, sobrenome, telefone);
 
-    if(contatoRepetido(novoContato)) {
-      System.out.println("CONTATO JÁ CADASTRADO");
+    if (contatoRepetido(novoContato)) {
       return false;
     }
-    
-    this.contatos[posicao] = novoContato;
+
+    this.contatos[posicao - 1] = novoContato;
     return true;
   }
 
   public String adicionaFavorito(int posicao, Contato contato) {
-    if(posicao > 10 || posicao < 1) {
+    if (posicao > 10 || posicao < 1) {
       return "POSICAO INVÁLIDA";
     }
 
-    if(contato == null) {
+    if (contato == null) {
       return "CONTATO INVÁLIDO";
     }
 
-    if(contatoRepetido(contato, listaDeFavoritos)) {
+    if (contatoRepetido(contato, listaDeFavoritos)) {
       return "CONTATO JÁ CADASTRADO";
     }
 
-    listaDeFavoritos[posicao] = contato;
-    return "CONTATO FAVORITADO NA POSIÇÃO " + posicao
+    listaDeFavoritos[posicao - 1] = contato;
+    return "CONTATO FAVORITADO NA POSIÇÃO " + posicao + "!";
   }
 
-  public boolena ehFavorito(Contato contato) {
-    for(Contato favorito : listaDeFavoritos) {
-      if(contato.equals(favorito))
-        return true;
+  public int ehFavorito(Contato contato) {
+    for (int i = 0; i < listaDeFavoritos.length; i++) {
+      Contato favorito = listaDeFavoritos[i];
+
+      if (contato.equals(favorito))
+        return i;
     }
-    return false;
+    return -1;
   }
 
   public void carregaContato(int posicao, String nome, String sobrenome, String telefone) {
     Contato novoContato = new Contato(nome, sobrenome, telefone);
-    this.contatos[posicao] = novoContato;
+    this.contatos[posicao - 1] = novoContato;
   }
 
   public boolean contatoRepetido(Contato tempContato) {
@@ -106,6 +129,14 @@ public class Agenda {
     }
 
     return false;
+  }
+
+  public void adicionarTag(String[] posicaoContatos, String tag, int posicaoTag) {
+    for (String posicaoAsString : posicaoContatos) {
+      int index = Integer.parseInt(posicaoAsString) - 1;
+      Contato recebeTag = contatos[index];
+      recebeTag.setTag(posicaoTag, tag);
+    }
   }
 
 }
