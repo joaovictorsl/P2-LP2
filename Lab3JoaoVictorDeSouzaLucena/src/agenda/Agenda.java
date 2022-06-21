@@ -33,12 +33,12 @@ public class Agenda {
   }
 
   public boolean removerContato(int posicao) {
-    Contato paraRemover = contatos[posicao];
+    Contato paraRemover = contatos[posicao - 1];
 
     if (paraRemover == null)
       return false;
 
-    contatos[posicao] = null;
+    contatos[posicao - 1] = null;
     int indexFav = ehFavorito(paraRemover);
 
     if (indexFav != -1)
@@ -107,7 +107,7 @@ public class Agenda {
     for (int i = 0; i < listaDeFavoritos.length; i++) {
       Contato favorito = listaDeFavoritos[i];
 
-      if (contato.equals(favorito))
+      if (favorito != null && contato.equals(favorito))
         return i;
     }
     return -1;

@@ -26,7 +26,7 @@ public class Contato {
   }
 
   public void setTag(int posicao, String tagToAdd) {
-    tags[posicao] = tagToAdd;
+    tags[posicao - 1] = tagToAdd;
   }
 
   public String[] getTags() {
