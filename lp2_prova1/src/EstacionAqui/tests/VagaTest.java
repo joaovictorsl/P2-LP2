@@ -20,6 +20,16 @@ public class VagaTest {
   }
 
   @Test
+  void testEquals() {
+    // Criando nova vaga e verificando se ela é igual a vagaBase.
+    Vaga novaVaga = new Vaga(1, "Rua dr Joao Moura, Sao Jose", "https://", 13.75);
+    assertTrue(novaVaga.equals(vagaBase));
+    // Criando nova vaga e verificando se ela é diferente da vagaBase.
+    novaVaga = new Vaga(1, "Rua Sei Lá, Sao João", "https://", 13.75);
+    assertFalse(novaVaga.equals(vagaBase));
+  }
+
+  @Test
   void testMudarStatus() {
     // Mudando status após criação da vaga.
     vagaBase.mudarStatus();
@@ -35,7 +45,7 @@ public class VagaTest {
     assertEquals(10.37, vagaBase.precoDaVaga(3));
     // Simulando por um valor inválido de horas.
     IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> vagaBase.precoDaVaga(-1));
-    assertEquals("Quantidade de horas deve ser positivo.", thrown.getMessage());
+    assertEquals("Quantidade de horas deve ser maior ou igual a zero.", thrown.getMessage());
   }
 
   @Test
