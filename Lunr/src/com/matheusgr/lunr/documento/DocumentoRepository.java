@@ -2,6 +2,7 @@ package com.matheusgr.lunr.documento;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -71,7 +72,27 @@ class DocumentoRepository {
    */
   public Set<Documento> busca(String termo) {
     return this.documentos.stream()
-        .filter((x) -> Arrays.binarySearch(x.getTexto(), termo) >= 0)
+        .filter((documento) -> Arrays.binarySearch(documento.getTexto(), termo) >= 0)
+        .collect(Collectors.toSet());
+  }
+
+  /**
+   * Realiza uma busca pelos metadados.
+   * 
+   * @param metadados metadados a serem buscados.
+   * @return Conjunto de documentos com os metadados.
+   */
+  public Set<Documento> busca(Map<String, String> metadados) {
+    return this.documentos.stream()
+        .filter((documento) -> {
+          Map<String, String> metadadosDoDocumento = documento.getMetadados();
+
+          for (String key : metadados.keySet()) {
+            if (!metadadosDoDocumento.get(key).equals(metadados.get(key)))
+              return false;
+          }
+          return true;
+        })
         .collect(Collectors.toSet());
   }
 
