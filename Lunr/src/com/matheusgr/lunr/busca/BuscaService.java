@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.matheusgr.lunr.documento.Documento;
 import com.matheusgr.lunr.documento.DocumentoDTO;
@@ -45,7 +46,10 @@ public class BuscaService {
    */
   public DocumentoDTO[] busca(Busca busca) {
     Map<Documento, Integer> respostaDocumento = busca.busca(this.ds);
-    DocumentoDTO[] documentos = ordena(respostaDocumento);
+
+    DocumentoDTO[] documentos = busca instanceof BuscaSimples ? ordena(respostaDocumento)
+        : converteStreamParaDocumentoDTOArray(respostaDocumento.entrySet().stream());
+
     this.br.adicionaBusca(busca, documentos);
     return documentos;
   }
@@ -56,10 +60,21 @@ public class BuscaService {
    * - retornar até 5 elementos (ou menos)
    */
   private DocumentoDTO[] ordena(Map<Documento, Integer> respostaDocumento) {
-    return respostaDocumento.entrySet().stream()
+    Stream<Entry<Documento, Integer>> streamOrdenada = respostaDocumento.entrySet().stream()
         .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
-        .limit(5)
-        .map(Entry::getKey)
+        .limit(5);
+    return converteStreamParaDocumentoDTOArray(streamOrdenada);
+  }
+
+  /**
+   * Transforma uma stream de Entry<Documento, Integer> para DocumentoDTO[].
+   * 
+   * @param respostaDocumento Stream do entrySet do HashMap para ser convertido
+   *                          para DocumentoDTO[]
+   * @return DocumentoDTO[] com valores das chaves do HasMap
+   */
+  private DocumentoDTO[] converteStreamParaDocumentoDTOArray(Stream<Entry<Documento, Integer>> respostaDocumento) {
+    return respostaDocumento.map(Entry::getKey)
         .map(DocumentoDTO::new)
         .collect(Collectors.toList())
         .toArray(new DocumentoDTO[] {});

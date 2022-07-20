@@ -54,6 +54,11 @@ class BuscaTest extends BaseTest {
     this.buscaController.busca(new String[] { "public" });
     this.buscaController.busca(new String[] { "use" });
     this.buscaController.busca(new String[] { "use", "public" });
+    Map<String, String> metadados = new HashMap<String, String>();
+    metadados.put("LINGUAGEM", "PT-BR");
+    metadados.put("LINHAS", "7");
+    metadados.put("TIPO DE ARQUIVO", "txt");
+    this.buscaController.busca(metadados);
 
     String[][] historicoDepuracao = this.buscaController.recuperaHistoricoDepuracao(0);
     String[] historicoIds = this.buscaController.recuperaHistoricoIds(0);
@@ -73,6 +78,12 @@ class BuscaTest extends BaseTest {
     assertArrayEquals(new String[] { "TERMO 1", "use" }, historicoDepuracao[0]);
     assertArrayEquals(new String[] { "TERMO 2", "public" }, historicoDepuracao[1]);
 
+    historicoDepuracao = this.buscaController.recuperaHistoricoDepuracao(3);
+    historicoIds = this.buscaController.recuperaHistoricoIds(3);
+    assertEquals(3, historicoDepuracao.length);
+    assertArrayEquals(new String[] { "METADADO 1", "LINHAS", "7" }, historicoDepuracao[0]);
+    assertArrayEquals(new String[] { "METADADO 2", "TIPO DE ARQUIVO", "txt" }, historicoDepuracao[1]);
+    assertArrayEquals(new String[] { "METADADO 3", "LINGUAGEM", "PT-BR" }, historicoDepuracao[2]);
   }
 
   @Test

@@ -10,10 +10,7 @@ import com.matheusgr.lunr.documento.DocumentoService;
  */
 public interface Busca {
   /**
-   * Realiza a busca a partir da consulta ao DocumentoService.
-   * 
-   * O DocumentoService realiza apenas operações simples de busca, mas sem
-   * ordenação ou tratamento da lógica de relevância.
+   * Método responsável por realizar a busca.
    * 
    * @param ds DocumentoService a ser utilizado para busca.
    * @return Mapa com os documentos encontrados e o fator de relevância de cada

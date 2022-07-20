@@ -23,6 +23,7 @@ class BuscaAvancada implements Busca {
    * Construtor padrão com os metadados a serem encontrados.
    * 
    * @param metadados Metadados a serem pesquisados.
+   * 
    */
   public BuscaAvancada(Map<String, String> metadados) {
     (new ValidadorBusca()).valida(metadados);
@@ -37,7 +38,8 @@ class BuscaAvancada implements Busca {
    * 
    * @param ds DocumentoService a ser utilizado para busca.
    * @return Map com documento como chave e inteiro como valor representado a sua
-   *         relevância, que no caso são todos iguais a 1, pois nesse método não
+   *         relevância, que no caso são todos iguais a 1, pois nesse tipo de
+   *         busca não
    *         há ordenação entre os documentos.
    */
   public Map<Documento, Integer> busca(DocumentoService ds) {
@@ -59,7 +61,8 @@ class BuscaAvancada implements Busca {
     Iterator<String> keyIterator = this.metadados.keySet().iterator();
 
     for (int i = 0; i < resultado.length; i++) {
-      resultado[i] = new String[] { "METADADO " + (i + 1), keyIterator.next() };
+      String key = keyIterator.next();
+      resultado[i] = new String[] { "METADADO " + (i + 1), key, this.metadados.get(key) };
     }
     return resultado;
   }
