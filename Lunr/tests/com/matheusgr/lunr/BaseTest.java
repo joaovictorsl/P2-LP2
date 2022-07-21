@@ -29,7 +29,8 @@ public class BaseTest {
     var exemplo = new DocumentoExemplos();
     this.documentoController.adicionaDocumentoHtml(HTML_ID, exemplo.sampleHTML());
     this.documentoController.adicionaDocumentoJava(JAVA_ID, exemplo.sampleJava());
-    this.documentoController.adicionaDocumentoTxt(TEXTO1_ID, "um arquivo! texto simples.\r\nuse DUAS linhas apenas.");
+    this.documentoController.adicionaDocumentoTxt(TEXTO1_ID,
+        "um arquivo! texto simples.\r\nuse DUAS linhas apenas.");
     this.documentoController.adicionaDocumentoTxt(TEXTO2_ID,
         "um arquivo! texto simples.\r\nuse TRÊS linhas agora.\r\nMAIS AVANÇO!");
   }

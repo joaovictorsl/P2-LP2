@@ -51,7 +51,7 @@ class BuscaAvancada implements Busca {
   }
 
   /**
-   * Descreve uma consulta para explicar a consulta que foi feita.
+   * Descreve uma consulta através dos metadados utilizados nela.
    * 
    * @return Descrição da busca, onde cada linha representa um parâmetro de busca
    *         e as colunas representam um detelhamento de cada parâmetro.

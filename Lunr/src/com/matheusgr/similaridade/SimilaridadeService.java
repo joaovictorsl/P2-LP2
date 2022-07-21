@@ -1,6 +1,9 @@
 package com.matheusgr.similaridade;
 
-import java.util.Optional;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.matheusgr.lunr.documento.Documento;
 import com.matheusgr.lunr.documento.DocumentoService;
@@ -43,15 +46,17 @@ public class SimilaridadeService {
    *         semelhança entre os documentos.
    */
   public double similaridade(String docId1, String docId2) {
-    Optional<Documento> d1 = this.documentoService.recuperaDocumento(docId1);
-    d1.Documento d2 = this.documentoService.recuperaDocumento(docId2);
-    // PEGA DOCUMENTO 1
-    // PEGA DOCUMENTO 2
-    // COLOCA TERMOS DO DOCUMENTO 1 EM UM CONJUNTO
-    // COLOCA TERMOS DO DOCUMENTO 2 EM OUTRO CONJUNTO
-    // A SIMILARIDADE É DETERMINADA PELO...
-    // --> (TAMANHO DA INTERSEÇÃO) / (TAMANHO DA UNIÃO DOS CONJUNTOS)
-    throw new UnsupportedOperationException();
+    Documento doc1 = documentoService.recuperaDocumento(docId1).get();
+    Documento doc2 = documentoService.recuperaDocumento(docId2).get();
+
+    Set<String> docWordSet1 = new HashSet<>(Arrays.asList(doc1.getTexto()));
+    Set<String> docWordSet2 = new HashSet<>(Arrays.asList(doc2.getTexto()));
+    Set<String> uniao = new HashSet<>(docWordSet1);
+    uniao.addAll(docWordSet2);
+    Set<String> intersecao = docWordSet1.stream().filter((valor) -> docWordSet2.contains(valor))
+        .collect(Collectors.toSet());
+
+    return (double) intersecao.size() / uniao.size();
   }
 
 }
