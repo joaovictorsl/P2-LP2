@@ -88,11 +88,11 @@ public class DocumentoService {
    * @return O ID do novo documento gerado a partir da concatenação.
    */
   public String concatena(String id1, String id2) {
-    Documento d1 = this.recuperaDocumentoOuFalhe(id2);
+    Documento d1 = this.recuperaDocumentoOuFalhe(id1);
     Documento d2 = this.recuperaDocumentoOuFalhe(id2);
     String novoId = "_MERGE" + id1 + "|" + id2;
     String novoTexto = Stream
-        .concat(Stream.of(d1.getTexto()), Stream.of(d2.getTexto()))
+        .concat(Stream.of(d1.getConteudo()), Stream.of(d2.getConteudo()))
         .collect(Collectors.joining())
         .toString();
     this.adicionaDocumento(new DocumentoTexto(novoId, novoTexto));
@@ -108,7 +108,7 @@ public class DocumentoService {
    */
   public String[] sumariza(String id) {
     Documento d = this.recuperaDocumentoOuFalhe(id);
-    List<String> collected = Stream.of(d.getTexto())
+    List<String> collected = Stream.of(d.getTermos())
         .filter((x) -> x.length() > 5)
         .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
         .entrySet()

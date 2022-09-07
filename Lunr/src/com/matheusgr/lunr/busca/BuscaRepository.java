@@ -29,15 +29,15 @@ class BuscaRepository {
   /**
    * Cadastra uma busca no histórico.
    * 
-   * @param buscaSimples Operação de busca realizada.
-   * @param documentos   Documentos resultantes dessa busca.
+   * @param busca      Operação de busca realizada.
+   * @param documentos Documentos resultantes dessa busca.
    */
-  public void adicionaBusca(Busca buscaSimples, DocumentoDTO[] documentos) {
+  public void adicionaBusca(Busca busca, DocumentoDTO[] documentos) {
     String[] ids = Stream.of(documentos)
         .map(DocumentoDTO::getId)
         .collect(Collectors.toList())
         .toArray(new String[] {});
-    this.buscas.add(new HistoricoBusca(buscaSimples, ids));
+    this.buscas.add(new HistoricoBusca(busca, ids));
   }
 
   /**
@@ -49,7 +49,7 @@ class BuscaRepository {
    */
   public HistoricoBusca recuperar(int numero) {
     this.validador.valida(numero);
-    if (numero > this.buscas.size()) {
+    if (numero >= this.buscas.size()) {
       throw new IllegalArgumentException("Histórico inexistente: " + numero);
     }
     return this.buscas.get(numero);

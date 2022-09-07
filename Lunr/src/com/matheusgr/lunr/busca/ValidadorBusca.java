@@ -19,7 +19,7 @@ class ValidadorBusca extends ValidadorPadrao {
   public void valida(String[] termos) {
     Objects.requireNonNull(termos, "Conteúdo não pode ser nulo");
     for (String t : termos) {
-      if (!t.isBlank()) {
+      if (t != null && !t.isBlank()) {
         return;
       }
     }
@@ -35,7 +35,7 @@ class ValidadorBusca extends ValidadorPadrao {
   public void valida(Map<String, String> metadados) {
     Objects.requireNonNull(metadados, "Metadados não pode ser nulo");
     for (String key : metadados.keySet()) {
-      if (metadados.get(key).isBlank()) {
+      if (metadados.get(key) == null || metadados.get(key).isBlank()) {
         throw new IllegalArgumentException("Nenhum metadado pode ser vazio");
       }
     }

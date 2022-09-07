@@ -33,36 +33,64 @@ public class ApresentacaoService {
    *                         documento.
    */
   public String apresenta(String docId, String tipoApresentacao) {
-
     Optional<Documento> docOpt = this.documentoService.recuperaDocumento(docId);
-    Documento doc;
-
-    if (docOpt.isPresent())
-      doc = docOpt.get();
-    else
+    if (docOpt.isEmpty())
       throw new NoSuchElementException("Documento não existe.");
 
-    String toReturn;
-
+    Documento doc = docOpt.get();
+    String toReturn = "";
     switch (tipoApresentacao.toUpperCase()) {
-      case "PRIMEIRA":
-        // toReturn = primeirasNLinhas();
-        break;
-
-      case "ULTIMA":
-
-        break;
-
-      case "ALTA":
-
+      case "CAIXA ALTA":
+        toReturn = doc.getConteudo().toUpperCase();
         break;
 
       default:
-        break;
+        throw new IllegalArgumentException("Tipo de apresentação inválida.");
     }
-    // TO DO
-    return "";
+    return toReturn;
+  }
 
+  public String apresenta(String docId, String tipoApresentacao, int numeroDeLinhas) {
+    if (numeroDeLinhas < 0)
+      throw new IllegalArgumentException("Valores negativos não são permitidos.");
+
+    Optional<Documento> docOpt = this.documentoService.recuperaDocumento(docId);
+    if (docOpt.isEmpty())
+      throw new NoSuchElementException("Documento não existe.");
+
+    Documento doc = docOpt.get();
+    String toReturn = "";
+    switch (tipoApresentacao.toUpperCase()) {
+      case "PRIMEIRAS":
+        toReturn = getPrimeirasNLinhasDe(doc, numeroDeLinhas);
+        break;
+      case "ULTIMAS":
+        toReturn = getUltimasNLinhasDe(doc, numeroDeLinhas);
+        break;
+
+      default:
+        throw new IllegalArgumentException("Tipo de apresentação inválida.");
+    }
+    return toReturn;
+
+  }
+
+  private String getPrimeirasNLinhasDe(Documento doc, int n) {
+    String[] linhas = doc.getConteudo().split("\n");
+    String toReturn = "";
+    for (int i = 0; i < n; i++) {
+      toReturn += linhas[i] + "\n";
+    }
+    return toReturn;
+  }
+
+  private String getUltimasNLinhasDe(Documento doc, int n) {
+    String[] linhas = doc.getConteudo().split("\n");
+    String toReturn = "";
+    for (int i = linhas.length - n; i < linhas.length; i++) {
+      toReturn += linhas[i] + "\n";
+    }
+    return toReturn;
   }
 
 }

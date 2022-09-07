@@ -1,4 +1,4 @@
-package com.matheusgr.lunr;
+package com.matheusgr.lunr.busca;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
+import com.matheusgr.lunr.BaseTest;
 import com.matheusgr.lunr.documento.DocumentoDTO;
 
 class BuscaTest extends BaseTest {
@@ -91,10 +92,10 @@ class BuscaTest extends BaseTest {
     Map<String, String> metadadosBuscados = new HashMap<>();
     metadadosBuscados.put("TIPO", "txt");
     DocumentoDTO[] busca = this.buscaController.busca(metadadosBuscados);
-    assertEquals(2, busca.length, "Todos os documentos de texto");
+    assertEquals(3, busca.length, "Todos os documentos de texto");
 
     Set<String> ids = Stream.of(busca).map(DocumentoDTO::getId).collect(Collectors.toSet());
-    Set<String> expectedIds = Stream.of(new String[] { TEXTO1_ID, TEXTO2_ID }).collect(Collectors.toSet());
+    Set<String> expectedIds = Stream.of(new String[] { TEXTO1_ID, TEXTO2_ID, TEXTO3_ID }).collect(Collectors.toSet());
     assertEquals(expectedIds, ids);
   }
 
@@ -104,7 +105,7 @@ class BuscaTest extends BaseTest {
     metadadosBuscados.put("TIPO", "txt");
     metadadosBuscados.put("LINHAS", "1");
     DocumentoDTO[] busca = this.buscaController.busca(metadadosBuscados);
-    assertEquals(1, busca.length, "Todos os documentos de texto");
+    assertEquals(1, busca.length, "Apeanas um documento de texto");
     assertEquals(TEXTO1_ID, busca[0].getId());
   }
 

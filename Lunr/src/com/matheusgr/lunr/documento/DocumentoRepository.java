@@ -2,6 +2,7 @@ package com.matheusgr.lunr.documento;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
  */
 class DocumentoRepository {
 
-  private ArrayList<Documento> documentos;
+  private List<Documento> documentos;
   private ValidadorDocumentos validador;
 
   /**
@@ -33,7 +34,7 @@ class DocumentoRepository {
    * @param d Documento a ser adicionado.
    */
   public void adiciona(Documento d) {
-    this.validador.validacao(d.getId(), d.getTexto());
+    this.validador.validacao(d.getId(), d.getTermos());
     this.documentos.add(d);
   }
 
@@ -48,11 +49,11 @@ class DocumentoRepository {
 
     for (int i = 0; i < this.documentos.size(); i++) {
       if (id.equals(this.documentos.get(i).getId())) {
-        return Optional.ofNullable(this.documentos.get(i));
+        return Optional.of(this.documentos.get(i));
       }
     }
 
-    return Optional.ofNullable(null);
+    return Optional.empty();
   }
 
   /**
@@ -72,7 +73,7 @@ class DocumentoRepository {
    */
   public Set<Documento> busca(String termo) {
     return this.documentos.stream()
-        .filter((documento) -> Arrays.binarySearch(documento.getTexto(), termo) >= 0)
+        .filter((documento) -> Arrays.binarySearch(documento.getTermos(), termo) >= 0)
         .collect(Collectors.toSet());
   }
 

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import com.matheusgr.apresentacao.ApresentacaoController;
 import com.matheusgr.lunr.busca.BuscaController;
 import com.matheusgr.lunr.documento.DocumentoController;
+import com.matheusgr.lunr.documento.DocumentoExemplos;
 import com.matheusgr.similaridade.SimilaridadeController;
 
 public class BaseTest {
@@ -13,6 +14,7 @@ public class BaseTest {
   public static final String TEXTO2_ID = "ABC";
   public static final String JAVA_ID = "456";
   public static final String HTML_ID = "123";
+  public static final String TEXTO3_ID = "JOAOLINDO";
 
   protected DocumentoController documentoController;
   protected BuscaController buscaController;
@@ -33,6 +35,8 @@ public class BaseTest {
         "um arquivo! texto simples.\r\nuse DUAS linhas apenas.");
     this.documentoController.adicionaDocumentoTxt(TEXTO2_ID,
         "um arquivo! texto simples.\r\nuse TRÊS linhas agora.\r\nMAIS AVANÇO!");
+    this.documentoController.adicionaDocumentoTxt(TEXTO3_ID,
+        "testando testando com com palavras palavras repetidas repetidas repetidas testando arroz arroz feijão abobrinha leite leite leite");
   }
 
 }

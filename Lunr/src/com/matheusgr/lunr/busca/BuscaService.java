@@ -69,8 +69,8 @@ public class BuscaService {
   /**
    * Transforma uma stream de Entry<Documento, Integer> para DocumentoDTO[].
    * 
-   * @param respostaDocumento Stream do entrySet do HashMap para ser convertido
-   *                          para DocumentoDTO[]
+   * @param respostaDocumento Stream do entrySet de Documentos do HashMap para ser
+   *                          convertido para DocumentoDTO[]
    * @return DocumentoDTO[] com valores das chaves do HasMap
    */
   private DocumentoDTO[] converteStreamParaDocumentoDTOArray(Stream<Entry<Documento, Integer>> respostaDocumento) {

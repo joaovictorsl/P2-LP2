@@ -2,8 +2,9 @@ package com.matheusgr.similaridade;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.matheusgr.lunr.documento.Documento;
 import com.matheusgr.lunr.documento.DocumentoService;
@@ -46,15 +47,24 @@ public class SimilaridadeService {
    *         semelhança entre os documentos.
    */
   public double similaridade(String docId1, String docId2) {
-    Documento doc1 = documentoService.recuperaDocumento(docId1).get();
-    Documento doc2 = documentoService.recuperaDocumento(docId2).get();
+    Optional<Documento> docOpt1 = documentoService.recuperaDocumento(docId1);
+    Optional<Documento> docOpt2 = documentoService.recuperaDocumento(docId2);
+    Documento doc1, doc2;
 
-    Set<String> docWordSet1 = new HashSet<>(Arrays.asList(doc1.getTexto()));
-    Set<String> docWordSet2 = new HashSet<>(Arrays.asList(doc2.getTexto()));
+    if (docOpt1.isEmpty() || docOpt2.isEmpty()) {
+      throw new NoSuchElementException("Documento não existe.");
+    } else {
+      doc1 = docOpt1.get();
+      doc2 = docOpt2.get();
+    }
+
+    Set<String> docWordSet1 = new HashSet<>(Arrays.asList(doc1.getTermos()));
+    Set<String> docWordSet2 = new HashSet<>(Arrays.asList(doc2.getTermos()));
     Set<String> uniao = new HashSet<>(docWordSet1);
     uniao.addAll(docWordSet2);
-    Set<String> intersecao = docWordSet1.stream().filter((valor) -> docWordSet2.contains(valor))
-        .collect(Collectors.toSet());
+
+    Set<String> intersecao = new HashSet<>(docWordSet1);
+    intersecao.retainAll(docWordSet2);
 
     return (double) intersecao.size() / uniao.size();
   }
