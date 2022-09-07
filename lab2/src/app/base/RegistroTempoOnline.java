@@ -1,4 +1,4 @@
-package lab2.src.base;
+package app.base;
 
 /**
  * RegistroTempoOnline serve para registrar o temopo online que um estudante

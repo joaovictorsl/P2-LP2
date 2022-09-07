@@ -1,4 +1,4 @@
-package prova1lp2.src.EstacionAqui.tests;
+package estacionaqui.tests;
 
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import EstacionAqui.Estacionamento;
+import estacionaqui.Estacionamento;
 
 public class EstacionamentoTest {
 

@@ -1,4 +1,4 @@
-package lab3.src.agenda;
+package agenda;
 
 /**
  * Uma agenda que mantém uma lista de contatos com posições. Podem existir 100

@@ -1,6 +1,6 @@
-package lab2.src.CLI;
+package app.cli;
 
-import lab2.src.base.*;
+import app.base.*;
 
 /**
  * MenuHolder é uma classe valor. Carrega os arrays que representam os menus.

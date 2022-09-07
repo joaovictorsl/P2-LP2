@@ -1,4 +1,4 @@
-package lab3.src.agenda;
+package agenda;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

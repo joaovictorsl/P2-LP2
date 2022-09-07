@@ -1,4 +1,4 @@
-package prova1simulado.src;
+package petadoption;
 
 /**
  * Dog

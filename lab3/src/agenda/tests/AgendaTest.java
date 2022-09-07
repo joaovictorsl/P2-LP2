@@ -1,4 +1,4 @@
-package lab3.src.agenda.tests;
+package agenda.tests;
 
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;

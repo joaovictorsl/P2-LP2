@@ -1,8 +1,8 @@
-package lab2.src.CLI;
+package app.cli;
 
 import java.util.Scanner;
 
-import lab2.src.base.*;
+import app.base.*;
 
 import java.util.ArrayList;
 

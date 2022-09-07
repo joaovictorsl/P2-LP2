@@ -1,6 +1,6 @@
-package lab2;
+package app;
 
-import lab2.src.base.*;
+import app.base.*;
 
 public class Coisa {
   public static void main(String[] args) {

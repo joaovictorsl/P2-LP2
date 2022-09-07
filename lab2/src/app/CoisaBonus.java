@@ -1,6 +1,6 @@
-package lab2;
+package app;
 
-import lab2.src.base.*;
+import app.base.*;
 
 /**
  * CoisaBonus serve como uma classe de testes para mim. Através de asserts vejo

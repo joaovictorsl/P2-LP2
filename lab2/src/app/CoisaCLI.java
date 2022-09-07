@@ -1,12 +1,12 @@
-package lab2;
+package app;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import lab2.src.CLI.*;
-import lab2.src.base.*;
+import app.cli.*;
+import app.base.*;
 
 /**
  * CoisaCLI é a classe responsável por ordenar a interação do usuário com o

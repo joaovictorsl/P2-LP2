@@ -1,11 +1,11 @@
-package prova1simulado.src.tests;
+package petadoption.tests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import src.Dog;
-import src.DogHost;
+import petadoption.Dog;
+import petadoption.DogHost;
 
 public class DogHostTest {
   private Dog d1;

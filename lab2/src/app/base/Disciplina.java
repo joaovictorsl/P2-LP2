@@ -1,4 +1,4 @@
-package lab2.src.base;
+package app.base;
 
 import java.util.Arrays;
 

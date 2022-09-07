@@ -1,4 +1,4 @@
-package lab2.src.base;
+package app.base;
 
 /**
  * A classe Descanso serve para descrever o descanso do aluno e julgar se ele

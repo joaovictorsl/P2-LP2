@@ -1,4 +1,4 @@
-package lab2;
+package app;
 
 /**
  * App é uma classe para executar o CoisaCLI.

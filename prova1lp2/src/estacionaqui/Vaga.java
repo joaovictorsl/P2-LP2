@@ -1,4 +1,4 @@
-package prova1lp2.src.EstacionAqui;
+package estacionaqui;
 
 /**
  * Vaga

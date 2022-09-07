@@ -1,4 +1,4 @@
-package prova1simulado.src.tests;
+package petadoption.tests;
 
 import org.junit.jupiter.api.Test;
 

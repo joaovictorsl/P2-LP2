@@ -1,4 +1,4 @@
-package lab3.src.agenda;
+package agenda;
 
 /**
  * Contato possui nome, sobrenome, telefone e uma lista de tags.
